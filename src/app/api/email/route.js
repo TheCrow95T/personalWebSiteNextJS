@@ -4,32 +4,44 @@ import { headers } from "next/headers";
 const nodemailer = require("nodemailer");
 
 export async function POST(request) {
-  const apiKey = headers.get("api-key");
-  if (apiKeys != "2e932fsubvfvsfe9f3fywscnvisunfuefw8fvsjlv") {
+  const apiKey = headers().get("api-key");
+  if (apiKey != "2e932fsubvfvsfe9f3fywscnvisunfuefw8fvsjlv") {
+    console.log("invalid api key");
     return NextResponse.status(404);
   }
+  const body = await request.formData();
+  console.log(body);
 
-  let transporter = nodemailer.createTransport({
-    service: "gmail",
-    auth: {
-      user: "youremail@gmail.com",
-      pass: "yourpassword",
-    },
-  });
+  try {
+    let transporter = nodemailer.createTransport({
+      service: "gmail",
+      auth: {
+        user: process.env.FROM_EMAIL,
+        pass: process.env.APPLICATION_KEY,
+      },
+    });
 
-  let mailOptions = {
-    from: "youremail@gmail.com",
-    to: "myfriend@yahoo.com",
-    subject: "Contact from ",
-    text: "That was easy!",
-  };
+    let mailOptions = {
+      from: process.env.FROM_EMAIL,
+      to: process.env.TO_EMAIL,
+      subject: "Contact from " + body.get("name"),
+      text:
+        "email address:\r\n" +
+        body.get("email") +
+        "\r\n\r\nContent:\r\n" +
+        body.get("message"),
+    };
 
-  transporter.sendMail(mailOptions, function (error, info) {
-    if (error) {
-      console.log(error);
-    } else {
+    const info = await transporter.sendMail(mailOptions);
+
+    if (info) {
       console.log("Email sent: " + info.response);
+      return NextResponse.json({ message: "Success, email was sent" });
+    } else {
+      return NextResponse.json({ message: "Failed, server error" });
     }
-  });
-  return new NextResponse({ message: "Success: email was sent" });
+  } catch (error) {
+    console.log(error);
+    return NextResponse.json({ message: "Failed, server error" });
+  }
 }
