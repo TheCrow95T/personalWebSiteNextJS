@@ -98,7 +98,7 @@ textarea{
   max-height: 100%;
   background-color: #212121;
   grid-template-rows: 1.6fr 1fr 1fr 1fr 1fr 1fr;
-  z-index: 2;
+  z-index: 5;
 }
 
 .webdevimg {
