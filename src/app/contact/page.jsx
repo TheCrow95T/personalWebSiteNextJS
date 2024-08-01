@@ -1,9 +1,13 @@
 "use client";
 
+import { useState } from "react";
 import styles from "../page.module.css";
 
-let contact = () => {
+let Contact = () => {
+    const [loading, setLoading] = useState(false);
+
     async function handleSubmit(event) {
+        setLoading(true);
         event.preventDefault();
         const formData = new FormData(event.target);
         try {
@@ -23,14 +27,17 @@ let contact = () => {
             console.log(responseData["message"]);
 
             alert(responseData["message"]);
+            setLoading(false);
         } catch (err) {
             console.error(err);
             alert("Error, please try resubmitting the form");
+            setLoading(false);
         }
     }
 
     return (
         <main className={styles.main}>
+            { loading ? <div className={styles.loadingBg}><div className={styles.loadingBgImg}></div></div> : null }
             <div className={styles.pageBgImg}></div>
             <div className={styles.content}>
                 <h2 className={styles.contentTitle}>Contact me</h2>
@@ -85,4 +92,4 @@ let contact = () => {
     );
 };
 
-export default contact;
+export default Contact;

@@ -22,12 +22,19 @@ export default function Home() {
                     </div>
                     <br />
                     <br />
-                    <a href="/resume.pdf" className={styles.submitBtn}>Download resume here!</a>
-                    <br/>
-                    <br/>
-                    <br/>
-                    <br/>
-                    <br/>
+                    <a
+                        href="/resume.pdf"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className={styles.submitBtn}
+                    >
+                        Download resume here!
+                    </a>
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <br />
                     <div className={styles.iconGroup}>
                         <a
                             href="https://www.linkedin.com/in/calvin-ong-jia-jun-0ab679225"
