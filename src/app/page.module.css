@@ -3,44 +3,12 @@
     background-color: black;
 }
 
-.homeBgImg {
-    background-image: url("/developerImage.jpg");
-    height: 100%;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-}
-
-.pageBgImg {
-    background-image: url("/laptopscreen.jpg");
-    filter: blur(8px);
-    -webkit-filter: blur(8px);
-    height: 100%;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-}
-
 .loadingBg {
     background: rgb(0, 0, 0, 0.5);
     position: absolute;
     height: 100%;
     width: 100%;
-    z-index: 10;
-}
-
-.loadingBgImg {
-    background: url(/loading.gif);
-    background-repeat: no-repeat;
-    background-size: contain;
-    height: 35%;
-    width: 35%;
-    position: absolute;
-    margin: auto;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
+    z-index: 20;
 }
 
 .content {
