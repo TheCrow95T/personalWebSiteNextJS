@@ -14,8 +14,9 @@ let Contact = () => {
     event.preventDefault();
     const formData = new FormData(event.target);
     try {
+      const url = process.env.NEXT_PUBLIC_BASEURL ? process.env.NEXT_PUBLIC_BASEURL + "/api/email" : "/api/email"
       const response = await fetch(
-        process.env.NEXT_PUBLIC_BASEURL + "/api/email",
+        url,
         {
           method: "post",
           headers: {
